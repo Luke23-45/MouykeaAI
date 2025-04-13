@@ -1,0 +1,26 @@
+[
+  {
+    "reminder_set": true,
+    "activity": "puzzles",
+    "reminder_time": "8:00 AM",
+    "message": "Reminder set for 'puzzles' at 8:00 AM."
+  },
+  {
+    "reminder_set": true,
+    "activity": "retrieve keys from the table",
+    "reminder_time": "8 am",
+    "message": "Reminder set for 'retrieve keys from the table' at 8 am."
+  },
+  {
+    "reminder_set": true,
+    "activity": "house cleaning",
+    "reminder_time": "8am",
+    "message": "Reminder set for 'house cleaning' at 8am."
+  },
+  {
+    "reminder_set": true,
+    "activity": "puzzles",
+    "reminder_time": "9:00PM",
+    "message": "Reminder set for 'puzzles' at 9:00PM."
+  }
+]

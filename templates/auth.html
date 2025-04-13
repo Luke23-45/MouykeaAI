@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Portal</title>
+    <style>
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            background-color: #f4f7f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background-color: #ffffff; 
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); 
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #2c3e50; 
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dcdcdc; 
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #3498db; 
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+
+        button {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            width: 100%; 
+        }
+
+        button:active {
+            transform: translateY(1px); 
+        }
+
+        .btn-primary {
+            background-color: #3498db; 
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9; 
+        }
+
+        .btn-secondary {
+            background-color: #e9ecef; 
+            color: #495057; 
+            margin-top: 15px;
+            width: auto; 
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-secondary:hover {
+            background-color: #dee2e6; 
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .message-area {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        .message-success {
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-error {
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb;
+        }
+
+        .user-info p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            color: #333;
+            text-align: left; 
+        }
+         .user-info strong {
+             color: #2c3e50;
+             float: right; 
+             margin-left: 10px; 
+         }
+         .user-info p::after { 
+             content: "";
+             display: table;
+             clear: both;
+         }
+
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+
+        <div id="message-area" class="message-area hidden"></div>
+
+        <div id="login-section">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <button id="show-register" class="btn-secondary">Don't have an account? Register</button>
+        </div>
+
+        <div id="register-section" class="hidden">
+            <h2>Register</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            <button id="show-login" class="btn-secondary">Already have an account? Login</button>
+        </div>
+
+        <div id="user-section" class="hidden">
+            <h2>Welcome!</h2>
+            <div class="user-info">
+                <p>Username:<strong id="user-username"></strong></p>
+                <p>User ID:<strong id="user-id"></strong></p>
+                <p>Is Admin:<strong id="user-isadmin"></strong></p>
+                </div>
+             <p style="margin-top:20px; font-size:0.9em;">You are logged in.</p>
+             </div>
+
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000';
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const userSection = document.getElementById('user-section');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const messageArea = document.getElementById('message-area');
+        const showRegisterButton = document.getElementById('show-register');
+        const showLoginButton = document.getElementById('show-login');
+        const userInfoUsername = document.getElementById('user-username');
+        const userInfoId = document.getElementById('user-id');
+        const userInfoIsAdmin = document.getElementById('user-isadmin');
+
+        function displayMessage(message, isError = false) {
+            messageArea.textContent = message;
+            messageArea.className = 'message-area'; 
+            if (message) {
+                messageArea.classList.remove('hidden');
+                messageArea.classList.add(isError ? 'message-error' : 'message-success');
+            } else {
+                messageArea.classList.add('hidden');
+            }
+        }
+
+        function clearMessage() {
+            displayMessage('');
+        }
+
+        async function fetchAPI(endpoint, method = 'GET', body = null) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const options = {
+                method: method,
+                headers: {},
+            };
+            if (body) {
+                options.headers['Content-Type'] = 'application/json';
+                options.body = JSON.stringify(body);
+            }
+            try {
+                const response = await fetch(url, options);
+                let responseData;
+                const contentType = response.headers.get("content-type");
+                if (response.redirected) {
+                    window.location.href = response.url;
+                    return; 
+                }
+
+                if (contentType && contentType.includes("application/json")) {
+                    responseData = await response.json();
+                } else {
+                    responseData = { text: await response.text() };
+                    if (!response.ok) {
+                       throw new Error(responseData.text || response.statusText || `HTTP error! Status: ${response.status}`);
+                    }
+                }
+
+                if (!response.ok) {
+                    const errorMessage = responseData?.error || responseData?.message || responseData?.text || `HTTP error! Status: ${response.status}`;
+                    throw new Error(errorMessage);
+                }
+                return responseData;
+
+            } catch (error) {
+                console.error('API Fetch Error:', error);
+                throw new Error(`Network or API error: ${error.message}`);
+            }
+        }
+
+        function showLoginView() {
+            loginSection.classList.remove('hidden');
+            registerSection.classList.add('hidden');
+            userSection.classList.add('hidden');
+            clearMessage();
+            loginForm.reset();
+            registerForm.reset();
+        }
+
+        function showRegisterView() {
+            loginSection.classList.add('hidden');
+            registerSection.classList.remove('hidden');
+            userSection.classList.add('hidden');
+            clearMessage();
+            loginForm.reset();
+            registerForm.reset();
+        }
+
+        function showLoggedInView(userData) {
+            loginSection.classList.add('hidden');
+            registerSection.classList.add('hidden');
+            userSection.classList.remove('hidden');
+            userInfoUsername.textContent = userData?.username || 'N/A';
+            userInfoId.textContent = userData?.userId || 'N/A'; 
+            userInfoIsAdmin.textContent = userData?.isAdmin ? 'Yes' : 'No'; 
+            clearMessage();
+
+        }
+
+        function showLoggedOutView() {
+             showLoginView();
+        }
+
+        async function handleLogin(event) {
+             event.preventDefault(); 
+             clearMessage(); 
+             const username = document.getElementById('login-username').value;
+             const password = document.getElementById('login-password').value;
+             if (!username || !password) {
+                 displayMessage('Please enter both username and password.', true);
+                 return;
+             }
+
+             try {
+                 const data = await fetchAPI('/auth/login', 'POST', { username, password });
+                 window.location.href = '/';
+
+             } catch (error) {
+                 displayMessage(`Login Failed: ${error.message}`, true);
+                 loginForm.reset(); 
+             }
+         }
+        async function handleRegister(event) {
+            event.preventDefault();
+            clearMessage();
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+             if (!username || !password) {
+                displayMessage('Please enter both username and password.', true);
+                return;
+            }
+            const body = { username, password };
+            try {
+                const data = await fetchAPI('/auth/register', 'POST', body);
+                displayMessage(data.message || 'Registration successful! Please log in.', false);
+                showLoginView(); 
+            } catch (error) {
+                 displayMessage(`Registration Failed: ${error.message}`, true);
+                 registerForm.reset(); 
+            }
+        }
+
+        async function checkSession() {
+            console.log("Checking session status...");
+            try {
+          
+                const data = await fetchAPI('/auth/session', 'GET');
+                if (data && data.user) {
+                    console.log("User session found:", data.user);
+                     showLoggedInView(data.user);
+                } else {
+                     console.log("No active user session found.");
+                    showLoggedOutView(); 
+                }
+            } catch (error) {
+                 console.error("Failed to check session:", error.message);
+                 showLoggedOutView(); 
+            }
+        }
+
+        loginForm.addEventListener('submit', handleLogin);
+        registerForm.addEventListener('submit', handleRegister);
+
+        showRegisterButton.addEventListener('click', showRegisterView);
+        showLoginButton.addEventListener('click', showLoginView);
+
+        document.addEventListener('DOMContentLoaded', checkSession);
+    </script>
+
+</body>
+</html>

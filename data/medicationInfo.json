@@ -1,0 +1,104 @@
+{
+  "name": "Eleanor Smith",
+  "date_of_birth": "1947-08-15",
+  "medical_conditions": [
+    "Type 2 Diabetes",
+    "Hypertension",
+    "Osteoarthritis",
+    "High Cholesterol"
+  ],
+  "allergies": [
+    "Penicillin",
+    "Sulfa drugs"
+  ],
+  "medications": [
+    {
+      "name": "Metformin",
+      "dosage": "500 mg",
+      "frequency": "Twice daily",
+      "times": [
+        "8:00 AM",
+        "8:00 PM"
+      ],
+      "route": "Oral",
+      "instructions": "Take with meals to prevent stomach upset.",
+      "start_date": "2023-05-20",
+      "end_date": null,
+      "prescribing_doctor": "Dr. Jane Doe"
+    },
+    {
+      "name": "Lisinopril",
+      "dosage": "10 mg",
+      "frequency": "Once daily",
+      "times": [
+        "9:00 AM"
+      ],
+      "route": "Oral",
+      "instructions": "Take at the same time each morning.",
+      "start_date": "2022-11-10",
+      "end_date": null,
+      "prescribing_doctor": "Dr. John Williams"
+    },
+    {
+      "name": "profen",
+      "dosage": "200 mg",
+      "frequency": "As needed",
+      "times": [],
+      "route": "Oral",
+      "instructions": "Take for pain relief, not to exceed 6 tablets in 24 hours. Take with food.",
+      "start_date": "2024-01-15",
+      "end_date": null,
+      "prescribing_doctor": null
+    },
+    {
+      "name": "Atorvastatin",
+      "dosage": "20 mg",
+      "frequency": "Once daily",
+      "times": [
+        "9:00 PM"
+      ],
+      "route": "Oral",
+      "instructions": "Take at bedtime.",
+      "start_date": "2023-08-01",
+      "end_date": null,
+      "prescribing_doctor": "Dr. Jane Doe"
+    }
+  ],
+  "other_medical_info": {
+    "blood_pressure_readings": [
+      {
+        "date": "2024-10-25",
+        "time": "10:00 AM",
+        "systolic": 135,
+        "diastolic": 85
+      },
+      {
+        "date": "2024-10-26",
+        "time": "09:30 AM",
+        "systolic": 130,
+        "diastolic": 80
+      }
+    ],
+    "blood_sugar_levels": [
+      {
+        "date": "2024-10-26",
+        "time": "7:00 AM",
+        "level": 150,
+        "notes": "Fasting"
+      },
+      {
+        "date": "2024-10-26",
+        "time": "9:00 AM",
+        "level": 180,
+        "notes": "After breakfast"
+      }
+    ],
+    "doctor_notes": "Regular check-up on 2024-10-20. Blood pressure slightly elevated, continue current medication. Monitor blood sugar levels."
+  },
+  "caregiver_contact": {
+    "name": "Robert Smith",
+    "relationship": "Son",
+    "email": "robert.smith@example.com",
+    "phone": "123-456-7890"
+  }
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload User Data</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%); /* Light gradient background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .upload-container {
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.8em;
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            font-size: 0.95em;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button {
+            padding: 8px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #2980b9;
+        }
+
+
+        input[type="file"]:focus-within { 
+             outline: none;
+             border-color: #3498db;
+             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+        }
+
+
+        button[type="submit"] {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            width: 100%;
+            background-color: #2ecc71; /* Green color for submit */
+            color: #ffffff;
+            margin-top: 15px; /* Space above button */
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2);
+        }
+
+         button[type="submit"]:hover:not(:disabled) {
+            background-color: #27ae60; /* Darker green on hover */
+            box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
+            transform: translateY(-2px);
+        }
+
+        button[type="submit"]:active:not(:disabled) {
+            transform: translateY(0px);
+             box-shadow: 0 2px 5px rgba(46, 204, 113, 0.2);
+        }
+
+         button[type="submit"]:disabled {
+            background-color: #95a5a6; /* Grey when disabled */
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+
+
+        .message-area {
+            margin-top: 25px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            text-align: center;
+            word-wrap: break-word;
+            min-height: 45px; 
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent; 
+        }
+
+        .message-area.hidden {
+            display: none; 
+        }
+
+        .message-success {
+            background-color: #d4edda; 
+            color: #155724; 
+            border-color: #c3e6cb;
+        }
+
+        .message-error {
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border-color: #f5c6cb;
+        }
+
+         .message-loading {
+            background-color: #e2e3e5; 
+            color: #383d41; 
+            border-color: #d6d8db;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h2>Upload User Data Files</h2>
+        <form id="upload-form" class="upload-form">
+            <div class="form-group">
+                <label for="medicationInfoFile">Medication Info (medicationInfo.json)</label>
+                <input type="file" id="medicationInfoFile" name="medicationInfo" accept=".json" required>
+            </div>
+
+            <div class="form-group">
+                <label for="healthConcernsFile">Health Concerns (identify_health_concerns.json)</label>
+                <input type="file" id="healthConcernsFile" name="healthConcerns" accept=".json" required>
+            </div>
+
+            <div class="form-group">
+                <label for="emailsFile">Emails (emails.json)</label>
+                <input type="file" id="emailsFile" name="emails" accept=".json" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contextInfoFile">Context Info (context_infor.json)</label>
+                <input type="file" id="contextInfoFile" name="contextInfo" accept=".json" required>
+            </div>
+
+            <button type="submit" id="submit-button">Upload Files</button>
+        </form>
+
+        <div id="message-area" class="message-area hidden"></div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('upload-form');
+        const submitButton = document.getElementById('submit-button');
+        const messageArea = document.getElementById('message-area');
+
+
+        const medicationInfoInput = document.getElementById('medicationInfoFile');
+        const healthConcernsInput = document.getElementById('healthConcernsFile');
+        const emailsInput = document.getElementById('emailsFile');
+        const contextInfoInput = document.getElementById('contextInfoFile');
+
+        function displayMessage(message, type = 'info') {
+            messageArea.textContent = message;
+            messageArea.className = 'message-area'; 
+            if (message) {
+                messageArea.classList.remove('hidden');
+                if (type === 'success') {
+                    messageArea.classList.add('message-success');
+                } else if (type === 'error') {
+                    messageArea.classList.add('message-error');
+                } else if (type === 'loading') {
+                     messageArea.classList.add('message-loading');
+                }
+            } else {
+                messageArea.classList.add('hidden');
+            }
+        }
+        uploadForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); 
+            displayMessage('Uploading files...', 'loading');
+            submitButton.disabled = true;
+            if (!medicationInfoInput.files[0] || !healthConcernsInput.files[0] || !emailsInput.files[0] || !contextInfoInput.files[0]) {
+                 displayMessage('Please select all four required JSON files.', 'error');
+                 submitButton.disabled = false;
+                 return;
+            }
+            const formData = new FormData();
+            formData.append('medicationInfo', medicationInfoInput.files[0]);
+            formData.append('healthConcerns', healthConcernsInput.files[0]);
+            formData.append('emails', emailsInput.files[0]);
+            formData.append('contextInfo', contextInfoInput.files[0]);
+            try {
+                const response = await fetch('/upload_data', { 
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json(); 
+                if (response.ok) {
+                    displayMessage(result.message || 'Files uploaded successfully!', 'success');
+                    uploadForm.reset(); 
+                    setTimeout(() => {
+                    window.location.href = '/'; 
+                }, 1500)
+                } else {
+                    let errorMessage = result.error || `Upload failed with status: ${response.status}`;
+                    if (result.details) {
+                        errorMessage += "\nDetails:\n";
+                         for (const key in result.details) {
+                            errorMessage += `- ${key}: ${result.details[key]}\n`;
+                        }
+                    }
+                    
+                    messageArea.style.whiteSpace = 'pre-wrap';
+                    displayMessage(errorMessage, 'error');
+                     messageArea.style.textAlign = 'left'; 
+                }
+
+            } catch (error) {
+                 console.error('Upload Error:', error);
+                 displayMessage(`An error occurred during upload: ${error.message}`, 'error');
+            } finally {
+                 submitButton.disabled = false; 
+            }
+        });
+    </script>
+</body>
+</html>

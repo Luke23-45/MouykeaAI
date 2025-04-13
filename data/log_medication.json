@@ -1,0 +1,12 @@
+{
+  "medication_logged": true,
+  "medication_name": "Ibuprofen",
+  "taken_at": "8:00 AM",
+  "medications_taken_today": [
+    {
+      "medication_name": "Ibuprofen",
+      "taken_at": "8:00 AM"
+    }
+  ],
+  "id": "c1e30bb6-99e7-4f41-a826-631aa00f596b"
+}

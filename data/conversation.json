@@ -1,0 +1,72 @@
+[
+  {
+    "recipient": "daughter",
+    "subject": "Late for dinner tonight",
+    "body": "Hi sweetie, I'm running late for dinner tonight.",
+    "valid_email": true,
+    "id": "5b278bcc-a745-4ee4-82e6-476c2bce7815"
+  },
+  {
+    "recipient": "daughter",
+    "subject": "Late for dinner tonight",
+    "body": "Hi sweetie,\n\nJust letting you know that I'll be late for dinner tonight.  I'll be there as soon as I can.\n\nLove,\nMom/Dad",
+    "valid_email": true,
+    "id": "2e354dd7-2416-48f4-8119-ddcbc15f9c32"
+  },
+  {
+    "recipient": "daughter",
+    "subject": "Running Late for Dinner Tonight",
+    "body": "Hi sweetheart,\n\nJust letting you know that I'll be late for dinner tonight.",
+    "valid_email": true,
+    "id": "1d0a951e-be7d-4d9d-b88c-d6a0ca589ae1"
+  },
+  {
+    "recipient": "daughter",
+    "subject": "Running Late for Dinner",
+    "body": "Hi sweetie,\n\nJust wanted to let you know that I'll be late for dinner tonight.  I'll be there as soon as I can.\n\nLove,\nMom/Dad",
+    "valid_email": true,
+    "id": "5b08a01d-a59b-4062-98a5-53b97d3704b6"
+  },
+  {
+    "recipient": "daughter",
+    "subject": "Dad's Visiting Next Week!",
+    "body": "Hi sweetie,\n\nJust wanted to let you know that I'll be visiting next week.  I'm so excited to see you!\n\nLove,\nDad/Mom",
+    "valid_email": "false",
+    "id": "8aa8c9c8-72eb-4623-ae81-d4a0239a830a"
+  },
+  {
+    "recipient": "son",
+    "subject": "My Visit!",
+    "body": "Hi son,\n\nI wanted to let you know that I'd like to visit you soon.  Let me know what dates work best for you.\n\nLove,\n[Your Name]",
+    "valid_email": true,
+    "id": "31c6e988-6429-4146-b5c8-ce08fed89170"
+  },
+  {
+    "recipient": "daughter",
+    "subject": "Late for dinner tonight",
+    "body": "Hi sweetie,\n\nJust wanted to let you know that I'll be late for dinner tonight.  I'll be there as soon as I can.\n\nLove,\nMom/Dad",
+    "valid_email": true,
+    "id": "810afe14-83f0-4787-adbf-fbb32e9b3391"
+  },
+  {
+    "recipient": "Sarah Vance",
+    "subject": "Mom's visit next week!",
+    "body": "I will be visiting you next week.",
+    "valid_email": "false",
+    "id": "4f48275e-a55b-4845-afdc-ab664046086b"
+  },
+  {
+    "recipient": "Sarah Vance",
+    "subject": "Late for dinner tonight",
+    "body": "Can you tell my daughter I will be late for dinner tonight?",
+    "valid_email": true,
+    "id": "829b8f49-f984-4672-bd3c-ae0b8b4840db"
+  },
+  {
+    "recipient": "Sarah Vance",
+    "subject": "Eleanor will be late for dinner",
+    "body": "Eleanor will be late for dinner tonight.",
+    "valid_email": true,
+    "id": "c3aeeace-eb7b-410b-be6b-1d38c33ea194"
+  }
+]

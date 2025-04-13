@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Voice Assistant | Elderly Care - Stunning UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+
+            --primary-accent: #7e22ce;
+            --primary-accent-light: #a855f7; 
+            --primary-accent-dark: #6b21a8; 
+            --secondary-accent: #2563eb; 
+            --secondary-accent-light: #60a5fa; 
+
+            --bg-gradient-main: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            --bg-gradient-chat: linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(248, 250, 255, 0.92) 100%); 
+            --sidebar-bg: rgba(28, 25, 55, 0.9); 
+            --input-area-bg: #ffffff;
+            --user-msg-bg: linear-gradient(135deg, var(--primary-accent), var(--primary-accent-light));
+            --response-msg-bg: #ffffff;
+
+            --text-primary: #1f2937; 
+            --text-secondary: #4b5563; 
+            --text-light: #f8fafc; 
+            --text-on-accent: #ffffff;
+            --text-placeholder: #9ca3af; 
+
+
+            --border-color-light: #e5e7eb; 
+            --border-color-medium: #d1d5db;
+            --border-color-dark: rgba(255, 255, 255, 0.15); 
+            --shadow-color-light: rgba(99, 102, 241, 0.1); 
+            --shadow-color-medium: rgba(0, 0, 0, 0.08);
+            --shadow-focus-ring: rgba(126, 34, 206, 0.25); 
+
+            --btn-gradient-send: linear-gradient(135deg, var(--secondary-accent), var(--secondary-accent-light));
+            --btn-gradient-send-hover: linear-gradient(135deg, var(--secondary-accent-light), var(--secondary-accent));
+            --btn-gradient-record: linear-gradient(135deg, #10b981, #34d399);
+            --btn-gradient-record-hover: linear-gradient(135deg, #059669, #10b981);
+            --btn-gradient-stop: linear-gradient(135deg, #ef4444, #f87171); 
+            --btn-gradient-stop-hover: linear-gradient(135deg, #dc2626, #ef4444);
+
+
+            --font-family-main: 'Poppins', sans-serif;
+            --base-font-size: 16.5px; 
+
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 2.5rem;
+
+            --border-radius-sm: 0.375rem; 
+            --border-radius-md: 0.75rem; 
+            --border-radius-lg: 1rem; 
+            --border-radius-xl: 1.5rem; 
+            --border-radius-pill: 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: var(--base-font-size);
+        }
+
+        body {
+            font-family: var(--font-family-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: var(--bg-gradient-main); 
+            color: var(--text-primary);
+            display: flex;
+        }
+
+        #app-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px) saturate(120%); 
+            -webkit-backdrop-filter: blur(15px) saturate(120%);
+        }
+
+        #sidebar {
+            width: 300px; 
+            flex-shrink: 0;
+            background-color: var(--sidebar-bg);
+            color: var(--text-light);
+            padding: var(--spacing-xl) var(--spacing-lg); 
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 0px 25px rgba(0, 0, 0, 0.15);
+            border-right: 1px solid var(--border-color-dark);
+            z-index: 10; 
+        }
+
+        .sidebar-header {
+            margin-bottom: var(--spacing-xxl); 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            color: var(--text-light);
+            opacity: 0.95;
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-section { 
+             margin-bottom: var(--spacing-lg);
+             margin-top: 56vh;
+        }
+
+        .user-info {
+            
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color-dark);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md); 
+            margin-bottom: var(--spacing-sm); 
+        }
+
+        .avatar {
+            width: 55px; 
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-accent-light), var(--secondary-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.4rem; 
+            color: var(--text-on-accent);
+            border: 2px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-details .name {
+            font-weight: 600; 
+            font-size: 1.1rem; 
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .user-details .status {
+            font-size: 0.9rem; 
+            color: #a7b4fc; 
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm); 
+            opacity: 0.9;
+        }
+
+        .status-dot {
+            width: 9px; 
+            height: 9px;
+            background-color: #34d399; 
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 5px #34d399; 
+        }
+
+        .btn_ui {
+          margin-top: 20px;
+  
+            width: 100%;
+            
+            
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: transparent;
+            color: var(--text-secondary); 
+            color: rgb(205, 207, 205);
+            border: 1px solid var(--border-color-dark); 
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: 1.02rem;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .btn_ui:hover {
+            background-color: rgba(239, 68, 68, 0.15); 
+            color: #f87171; /* Light red text */
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .test_div{
+          margin-top: -10px;
+        }
+        #chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg); 
+            box-shadow: -6px 0px 20px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+            margin-left: -15px; 
+            padding-left: 15px; 
+            position: relative;
+            background: linear-gradient(135deg, #e0f2f7 0%, #cce5f0 33%, #b2d8e6 66%, #97cbe0 100%);
+        }
+
+        #chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: var(--spacing-xl); 
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md); 
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-accent-light) transparent;
+        }
+        #chat-box::-webkit-scrollbar { width: 8px; }
+        #chat-box::-webkit-scrollbar-track { background: transparent; margin: var(--spacing-sm) 0;}
+        #chat-box::-webkit-scrollbar-thumb {
+             background-color: var(--primary-accent-light);
+             border-radius: var(--border-radius-pill);
+             border: 2px solid transparent; 
+             background-clip: content-box;
+        }
+        #chat-box::-webkit-scrollbar-thumb:hover { background-color: var(--primary-accent); }
+        .message {
+            padding: var(--spacing-md) var(--spacing-lg); 
+            border-radius: var(--border-radius-lg); 
+            max-width: 78%; 
+            word-wrap: break-word;
+            line-height: 1.6; 
+            font-size: 1.05rem; 
+            font-weight: 400; 
+            box-shadow: 0 4px 12px var(--shadow-color-light); 
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+            position: relative; 
+             padding-bottom: 35px; 
+        }
+        .user-message {
+            background: var(--user-msg-bg);
+            color: var(--text-on-accent);
+            font-weight: 500; 
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: var(--border-radius-sm);
+            padding-bottom: var(--spacing-md);
+        }
+        .response-message {
+            background: #f9f9f9;
+            color: #333333; 
+            align-self: flex-start;
+            margin-right: auto;
+            border: 1px solid #e0e0e0; 
+            border-radius: 10px; 
+            padding: 12px 18px; 
+            font-size: 18px; 
+            font-weight: 500;
+            letter-spacing: 0.08px;
+            line-height: 1.6; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07); 
+            padding-bottom: 40px;
+        }
+
+        .play-audio-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            background: var(--secondary-accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 16px; 
+            line-height: 28px; 
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            padding: 0; 
+        }
+        .play-audio-btn:hover {
+            background-color: var(--secondary-accent-dark);
+            transform: scale(1.1);
+        }
+        .play-audio-btn:active {
+            transform: scale(0.95);
+        }
+        .play-audio-btn.loading {
+            cursor: default;
+            background-color: var(--text-secondary);
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+             0%, 100% { opacity: 1; }
+             50% { opacity: 0.6; }
+        }
+
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        #input-area {
+            display: flex;
+            padding: var(--spacing-md) var(--spacing-lg); 
+            background-color: var(--input-area-bg);
+            border-top: 1px solid var(--border-color-light);
+            align-items: center; 
+            gap: var(--spacing-md); 
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+        }
+
+        #text-input {
+            flex-grow: 1;
+            padding: 1rem var(--spacing-lg); 
+            border: 1px solid var(--border-color-light); 
+            border-radius: var(--border-radius-pill);
+            resize: vertical; 
+            min-height: 60px; 
+            max-height: 160px;
+            overflow-y: auto;
+            font-size: 1.1rem; 
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: #fcfcfd; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04); 
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        #text-input:focus {
+            border-color: var(--accent-color);
+            background-color: #ffffff; 
+            box-shadow: 0 0 0 3px rgba(123, 190, 253, 0.2); 
+            outline: none;
+            border: none;
+        }
+
+        #text-input::placeholder {
+            color: var(--text-placeholder);
+            opacity: 1;
+            font-weight: 400;
+        }
+
+        .input-button {
+            padding: 0.6rem var(--spacing-md); 
+            border: none;
+            border-radius: var(--border-radius-pill);
+            background-color: #6c63ff; 
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 0.95rem; 
+            font-weight: 600;
+            transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs); 
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.3px;
+            min-width: 90px; 
+            height: 42px; 
+            user-select: none;
+        }
+
+        .input-button:hover {
+            background-color: #5a52e8;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+        }
+
+        .input-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .input-button span { 
+           font-size: 1.2em;
+           line-height: 1;
+        }
+        .input-button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.03); 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .input-button:active:not(:disabled) {
+            transform: translateY(-1px) scale(0.98); 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .input-button:disabled {
+            opacity: 0.5; 
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            background: #bdc3c7 !important; 
+        }
+
+        #submit-text-btn {
+            background: var(--btn-gradient-send);
+        }
+        #submit-text-btn:hover:not(:disabled) {
+            background: var(--btn-gradient-send-hover);
+        }
+
+        #start-btn {
+             background: var(--btn-gradient-record);
+        }
+        #start-btn:hover:not(:disabled) {
+             background: var(--btn-gradient-record-hover);
+        }
+        #start-btn span { font-size: 1.3em; }
+
+
+        #stop-btn {
+             background: var(--btn-gradient-stop);
+        }
+        #stop-btn:hover:not(:disabled) {
+             background: var(--btn-gradient-stop-hover);
+        }
+        #stop-btn span { font-size: 1em; } 
+
+
+    
+        #status {
+           display: none; 
+        }
+
+        #preloader {
+            display: none;
+            margin: 0 var(--spacing-sm); 
+            border: 4px solid rgba(126, 34, 206, 0.2); 
+            border-top: 4px solid var(--primary-accent); 
+            border-radius: 50%;
+            width: 28px; 
+            height: 28px;
+            animation: spin 0.9s linear infinite;
+            align-self: center; 
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .response-message.loading {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .response-message.loading::after {
+             content: '...';
+             display: inline-block;
+             vertical-align: bottom;
+             animation: blinkDots 1.5s linear infinite;
+             width: 1.5em; 
+             text-align: left;
+             margin-left: 4px;
+        }
+        @keyframes blinkDots {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+            100% { content: '.'; }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app-wrapper">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                AI Assistant
+            </div>
+
+            <div class="sidebar-section">
+                <div class="user-info">
+                    <div class="avatar">AI</div>
+                    <div class="user-details">
+                        <div class="name">Elderly Care Bot</div> <div class="status">
+                            <span class="status-dot"></span> Online
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+            <div class="test_div">
+              <a href="./add_data_page"><button href="#" class="btn_ui" id="add-details-link">Customize Your AI</button> </a>
+              
+              <button class="btn_ui" id="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div id="chat-container">
+            <div id="chat-box">
+                </div>
+            <div id="input-area">
+                <textarea id="text-input" rows="1" placeholder="Type your message..."></textarea>
+                <button id="submit-text-btn" class="input-button" title="Send Message">
+                    <span>➤</span> </button>
+                <button id="start-btn" class="input-button" title="Start Recording">
+                     <span>🎙️</span> </button>
+                <button id="stop-btn" class="input-button" title="Stop Recording" disabled>
+                     <span>⏹️</span> </button>
+                <div id="preloader"></div>
+                 <p id="status">Press "Record" to begin.</p>
+             </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/audiobuffer-to-wav@1.0.0/index.min.js"></script>
+    <script>
+      const chatBox = document.getElementById('chat-box');
+      const textInput = document.getElementById('text-input');
+      const submitTextBtn = document.getElementById('submit-text-btn');
+      const startBtn = document.getElementById('start-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      const statusElem = document.getElementById('status');
+      const preloader = document.getElementById('preloader');
+      const startBtnText = startBtn.querySelector('span');
+      const startBtnLabel = '🎙️';
+      const recordingLabel = '🔊';
+      const logoutBtn = document.getElementById('logout-btn');
+
+      let mediaRecorder;
+      let audioChunks = [];
+      let audioContext;
+      let isLoading = false;
+      let currentAudio = null;        
+      let currentAudioButton = null; 
+      const thinkingMessageText = 'Thinking...'; 
+
+      // --- Core Functions ---
+
+      function appendMessage(text, type ,isHtml = false) {
+          const messageDiv = document.createElement('div');
+          messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'response-message');
+
+          const messageText = text;
+          let isThinkingMessage = false;
+          if (isHtml) {
+              messageDiv.innerHTML = text;
+          } else {
+              messageDiv.textContent = text;
+              if (text === thinkingMessageText && type === 'response') {
+                  isThinkingMessage = true;
+                  messageDiv.classList.add('loading');
+               }
+          }
+
+          if (type === 'response' && !isHtml && !isThinkingMessage) {
+              messageDiv.dataset.messageText = messageText; 
+
+              const playButton = document.createElement('button');
+              playButton.classList.add('play-audio-btn');
+              playButton.innerHTML = '▶️'; 
+              playButton.title = 'Play audio';
+              playButton.setAttribute('aria-label', 'Play message audio');
+              playButton.onclick = () => handlePlayAudioClick(messageText, playButton);
+              messageDiv.appendChild(playButton);
+          }
+
+          if (isThinkingMessage && !messageDiv.classList.contains('loading')) {
+              messageDiv.classList.add('loading');
+          }
+
+          
+          chatBox.appendChild(messageDiv);
+          setTimeout(() => {
+              chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+          }, 50);
+          return messageDiv;
+      }
+
+
+      function appendMessage1(text, type, user_input,isHtml = false){
+          const messageDiv = document.createElement('div');
+          messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'response-message');
+          const messageText = text;
+          let isThinkingMessage = false;
+          if (isHtml) {
+              messageDiv.innerHTML = text;
+          } else {
+              messageDiv.textContent = text;
+              if (text === thinkingMessageText && type === 'response') {
+                  isThinkingMessage = true;
+                  messageDiv.classList.add('loading');
+               }
+          }
+          if (type === 'response' && !isHtml && !isThinkingMessage) {
+              messageDiv.dataset.messageText = messageText; 
+
+              const playButton = document.createElement('button');
+              playButton.classList.add('play-audio-btn');
+              playButton.innerHTML = '▶️'; 
+              playButton.title = 'Play audio';
+              playButton.setAttribute('aria-label', 'Play message audio');
+              playButton.onclick = () => handlePlayAudioClick(messageText, playButton);
+              messageDiv.appendChild(playButton);
+          }
+
+          if (isThinkingMessage && !messageDiv.classList.contains('loading')) {
+              messageDiv.classList.add('loading');
+          }
+    
+          chatBox.lastElementChild.innerHTML = user_input;
+          
+          chatBox.appendChild(messageDiv);
+          setTimeout(() => {
+              chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+          }, 50);
+          return messageDiv;
+      }
+
+
+      function showPreloader(show) {
+          isLoading = show;
+          preloader.style.display = show ? 'block' : 'none';
+          textInput.disabled = show;
+          submitTextBtn.disabled = show;
+          if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+              startBtn.disabled = show;
+              stopBtn.disabled = true;
+          } else if (show) {
+              stopBtn.disabled = true;
+          }
+      }
+
+       function stopAndCleanup(buttonToReset = null, restoreOriginalHandler = true) {
+          if (currentAudio) {
+              console.log("Stopping and cleaning up audio.");
+              currentAudio.pause(); 
+              URL.revokeObjectURL(currentAudio.src);
+              currentAudio = null;
+          }
+
+           if (currentAudioButton) {
+               currentAudioButton.classList.remove('playing');
+               currentAudioButton.innerHTML = '▶️';
+               if (restoreOriginalHandler) {
+                   const originalText = currentAudioButton.closest('.response-message')?.dataset.messageText || '';
+                   if (originalText) {
+                       currentAudioButton.onclick = () => handlePlayAudioClick(originalText, currentAudioButton);
+                    } else {
+                       currentAudioButton.onclick = null; 
+                   }
+               }
+           }
+           currentAudioButton = null; 
+
+          if(buttonToReset && buttonToReset !== currentAudioButton){
+              buttonToReset.classList.remove('playing', 'loading');
+              buttonToReset.innerHTML = '▶️';
+               const originalText = buttonToReset.closest('.response-message')?.dataset.messageText || '';
+               if (originalText) {
+                  buttonToReset.onclick = () => handlePlayAudioClick(originalText, buttonToReset);
+                } else {
+                  buttonToReset.onclick = null;
+                }
+          }
+       }
+
+
+      async function handlePlayAudioClick(textToSpeak, buttonElement) {
+        
+
+          if (currentAudio && currentAudioButton === buttonElement) {
+            
+              if (currentAudio.paused) {
+
+                  console.log("Resuming audio playback.");
+                  try {
+                      await currentAudio.play();
+                      buttonElement.innerHTML = '⏹️'; 
+                      buttonElement.classList.add('playing');
+                      buttonElement.onclick = () => pauseAudio(buttonElement); 
+                  } catch (error) {
+                      console.error("Error resuming audio:", error);
+                      stopAndCleanup(buttonElement); // Cleanup on error
+                  }
+              } else {
+
+                   console.warn("handlePlayAudioClick called on playing audio's button - pausing instead.");
+                   pauseAudio(buttonElement);
+              }
+          } else {
+
+              if (currentAudio) {
+                  stopAndCleanup(null, true); 
+              }
+
+              console.log("Requesting new audio for:", textToSpeak);
+              const messageDiv = buttonElement.closest('.response-message');
+              if (messageDiv && !messageDiv.dataset.messageText) {
+                  messageDiv.dataset.messageText = textToSpeak;
+              }
+
+              buttonElement.disabled = true;
+              buttonElement.classList.add('loading');
+              buttonElement.innerHTML = '...';
+
+              try {
+                  if (!audioContext) { audioContext = new (window.AudioContext || window.webkitAudioContext)(); }
+                  if (audioContext.state === 'suspended') { await audioContext.resume(); }
+
+                  const response = await fetch('/synthesize_speech', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ text: textToSpeak })
+                  });
+                  if (!response.ok) {
+                      const errorText = await response.text();
+                      throw new Error(`Server error ${response.status}: ${errorText || 'Failed to synthesize speech'}`);
+                  }
+
+                  const audioBlob = await response.blob();
+                  playAudioBlob(audioBlob, buttonElement); 
+
+              } catch (error) {
+                  console.error("Error fetching or playing audio:", error);
+                  const errorMsgDiv = appendMessage(`Error playing audio: ${error.message}`, 'response');
+                    const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                    if (playBtn) playBtn.remove();
+                  stopAndCleanup(buttonElement); 
+              }
+          }
+      }
+
+      function playAudioBlob(blob, buttonElement) {
+          const audioUrl = URL.createObjectURL(blob);
+          currentAudio = new Audio(audioUrl);
+          currentAudioButton = buttonElement; 
+
+          buttonElement.classList.remove('loading');
+          buttonElement.classList.add('playing');
+          buttonElement.innerHTML = '⏹️'; 
+          buttonElement.disabled = false;
+          buttonElement.onclick = () => pauseAudio(buttonElement);
+          currentAudio.play()
+              .then(() => {
+                  console.log("Audio playback started.");
+              })
+              .catch(error => {
+                  console.error("Error starting audio playback:", error);
+
+                   const errorMsgDiv = appendMessage("Error playing audio.", 'response');
+                    const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                    if (playBtn) playBtn.remove();
+                  stopAndCleanup(buttonElement); 
+              });
+
+          currentAudio.onended = () => {
+              console.log("Audio playback finished naturally.");
+              stopAndCleanup(buttonElement, true); 
+          };
+
+          currentAudio.onerror = (e) => {
+              console.error("Audio playback error event:", e);
+              const errorMsgDiv = appendMessage("An error occurred during audio playback.", 'response');
+                const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                if (playBtn) playBtn.remove();
+              stopAndCleanup(buttonElement, true); 
+          };
+      }
+
+      function pauseAudio(buttonElement) {
+           if (currentAudio && currentAudioButton === buttonElement && !currentAudio.paused) {
+               console.log("Pausing audio playback.");
+               currentAudio.pause();
+               buttonElement.classList.remove('playing');
+               buttonElement.innerHTML = '▶️'; 
+               const originalText = buttonElement.closest('.response-message')?.dataset.messageText || '';
+                if (originalText) {
+                   buttonElement.onclick = () => handlePlayAudioClick(originalText, buttonElement);
+                 } else {
+                  console.error("Could not retrieve text to restore play handler after pause.");
+                  buttonElement.onclick = null; 
+               }
+           } else {
+               console.warn("Pause called on button that wasn't playing or doesn't match current audio.");
+           }
+       }
+      startBtn.addEventListener('click', async () => {
+          if (isLoading) return;
+          audioChunks = [];
+          try {
+              if (!audioContext) {
+                  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+              }
+              if (audioContext.state === 'suspended') {
+                  await audioContext.resume();
+                  console.log("AudioContext resumed by user interaction.");
+              }
+              const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+              mediaRecorder = new MediaRecorder(stream);
+              mediaRecorder.start();
+              startBtn.disabled = true;
+              stopBtn.disabled = false;
+              if (startBtnText) startBtnText.textContent = recordingLabel;
+              startBtn.title = "Recording...";
+              mediaRecorder.addEventListener('dataavailable', event => {
+                  if (event.data.size > 0) { audioChunks.push(event.data); }
+              });
+              mediaRecorder.addEventListener('stop', () => {
+                  const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                  convertToDesiredFormatAndSend(audioBlob);
+                  stream.getTracks().forEach(track => track.stop());
+                  if (startBtnText) startBtnText.textContent = startBtnLabel;
+                  startBtn.title = "Start Recording";
+              });
+          } catch (err) {
+              console.error('Error accessing microphone:', err);
+              const errorMsgDiv = appendMessage('Error accessing microphone. Please grant permission and try again.', 'response');
+                const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                if (playBtn) playBtn.remove();
+              startBtn.disabled = false;
+              stopBtn.disabled = true;
+              if (startBtnText) startBtnText.textContent = startBtnLabel;
+              startBtn.title = "Start Recording";
+          }
+      });
+
+      stopBtn.addEventListener('click', () => {
+           if (mediaRecorder && mediaRecorder.state === 'recording') {
+               mediaRecorder.stop();
+               stopBtn.disabled = true;
+               startBtn.disabled = true;
+            } else {
+               console.warn("Stop clicked when not recording or recorder inactive.");
+               stopBtn.disabled = true;
+               startBtn.disabled = isLoading;
+               if (startBtnText) startBtnText.textContent = startBtnLabel;
+               startBtn.title = "Start Recording";
+            }
+      });
+      async function convertToDesiredFormatAndSend(audioBlob) {
+           appendMessage('<em>Processing audio...</em>', 'user', true); 
+           showPreloader(true);
+           const fileReader = new FileReader();
+           fileReader.onloadend = async () => {
+               const arrayBuffer = fileReader.result;
+               try {
+                   if (!audioContext || audioContext.state === 'suspended') {
+                        if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        await audioContext.resume();
+                   }
+                   const decodedBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                   const targetSampleRate = 16000;
+                   const offlineCtx = new OfflineAudioContext(1, Math.ceil(decodedBuffer.length * targetSampleRate / decodedBuffer.sampleRate), targetSampleRate);
+                   const source = offlineCtx.createBufferSource();
+                   source.buffer = decodedBuffer;
+                   source.connect(offlineCtx.destination);
+                   source.start(0);
+                   const resampledMonoBuffer = await offlineCtx.startRendering();
+                   const wavBlob = new Blob([audioBufferToWav(resampledMonoBuffer)], { type: 'audio/wav' });
+                   sendAudioToServer(wavBlob);
+               } catch (error) {
+                   console.error("Error processing audio:", error);
+                   const errorMsgDiv = appendMessage(`Audio processing error: ${error.message}. Please try again.`, 'response');
+                     const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                     if (playBtn) playBtn.remove();
+                   showPreloader(false);
+                   startBtn.disabled = false;
+               }
+           };
+           fileReader.onerror = (e) => {
+               console.error("FileReader error:", e);
+               const errorMsgDiv = appendMessage('Error reading audio data.', 'response');
+                 const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                 if (playBtn) playBtn.remove();
+               showPreloader(false);
+               startBtn.disabled = false;
+           };
+           fileReader.readAsArrayBuffer(audioBlob);
+      }
+      function sendAudioToServer(blob) {
+          let thinkingMessageDiv = appendMessage(thinkingMessageText, 'response'); 
+          const formData = new FormData();
+          formData.append('audio', blob, 'recording.wav');
+          fetch('/process_audio', { method: 'POST', body: formData })
+          .then(response => {
+               if (!response.ok) { return response.text().then(text => { throw new Error(`Server error ${response.status}: ${text || 'Unknown error'}`); }); }
+               return response.json();
+           })
+          .then(data => {
+              //console.log('Server response (audio):', data);
+              const responseText = data.response
+              thinkingMessageDiv.remove();
+              appendMessage1(responseText["final_message"], 'response',responseText["user_input"]); 
+           })
+          .catch(err => {
+               console.error('Error sending/receiving audio data:', err);
+              thinkingMessageDiv.remove();
+               const errorMsgDiv = appendMessage(`Error: ${err.message}`, 'response');
+                const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                if (playBtn) playBtn.remove();
+          })
+          .finally(() => {
+              showPreloader(false);
+              if (!mediaRecorder || mediaRecorder.state === 'inactive') { startBtn.disabled = false; }
+              stopBtn.disabled = true;
+          });
+      }
+
+      function handleTextSubmit() {
+          if (isLoading) return;
+          const text = textInput.value.trim();
+          if (text) {
+              appendMessage(text, 'user');
+              textInput.value = '';
+              textInput.style.height = 'auto';
+              textInput.dispatchEvent(new Event('input'));
+              textInput.focus();
+              showPreloader(true);
+              sendTextToServer(text);
+          }
+      }
+
+      submitTextBtn.addEventListener('click', handleTextSubmit);
+      textInput.addEventListener('keydown', (event) => {
+           if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); handleTextSubmit(); }
+      });
+      textInput.addEventListener('input', () => {
+          textInput.style.height = 'auto';
+          let scrollHeight = textInput.scrollHeight;
+          const maxHeight = parseInt(window.getComputedStyle(textInput).maxHeight) || 140;
+          textInput.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
+      });
+      function sendTextToServer(text) {
+          let thinkingMessageDiv = appendMessage(thinkingMessageText, 'response'); 
+          fetch('/process_text', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: text }) })
+          .then(response => {
+              if (!response.ok) { return response.text().then(text => { throw new Error(`Server error ${response.status}: ${text || 'Unknown error'}`); }); }
+              return response.json();
+          })
+           .then(data => {
+              console.log('Server response (text):', data);
+              const responseText = data.response || (typeof data === 'string' ? data : 'Received complex object, check console.');
+              thinkingMessageDiv.remove();
+              appendMessage(responseText, 'response'); 
+          })
+           .catch(err => {
+              console.error('Error sending/receiving text data:', err);
+              thinkingMessageDiv.remove();
+               const errorMsgDiv = appendMessage(`Error: ${err.message}`, 'response');
+                const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                if (playBtn) playBtn.remove();
+          })
+          .finally(() => {
+              showPreloader(false);
+          });
+      }
+      async function fetchAPI(endpoint, method = 'GET', body = null) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const options = {
+                method: method,
+                headers: {},
+            };
+            if (body) {
+                options.headers['Content-Type'] = 'application/json';
+                options.body = JSON.stringify(body);
+            }
+            try {
+                const response = await fetch(url, options);
+                let responseData;
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                     responseData = await response.json();
+                } else {
+                     responseData = { text: await response.text() };
+                     if (!response.ok) {
+                         throw new Error(responseData.text || response.statusText || `HTTP error! Status: ${response.status}`);
+                     }
+                }
+
+                if (!response.ok) {
+                    const errorMessage = responseData?.error || responseData?.message || responseData?.text || response.statusText || `HTTP error! Status: ${response.status}`;
+                    throw new Error(errorMessage);
+                }
+                return responseData;
+            } catch (error) {
+                console.error('API Fetch Error:', error);
+                throw new Error(`Network or API error: ${error.message}`);
+            }
+        }
+        async function logout() {
+    console.log("Logout button clicked. Attempting to log out...");
+
+    try {
+  
+        const data = await fetchAPI('/auth/logout', 'POST');
+        console.log("Logout successful:", data.message || 'Logged out');
+        window.location.href = '/'; 
+
+    } catch (error) {
+        console.error("Logout failed:", error);
+        alert(`Logout failed: ${error.message}. Please try again.`);
+    }
+}
+
+async function fetchAPI(endpoint, method = 'GET', body = null) {
+    const API_BASE_URL = 'http://localhost:5000'; 
+    const url = `${API_BASE_URL}${endpoint}`;
+    const options = {
+        method: method,
+        headers: {},
+    };
+
+    if (body) {
+        options.headers['Content-Type'] = 'application/json';
+        options.body = JSON.stringify(body);
+    }
+    try {
+        const response = await fetch(url, options);
+        let responseData;
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+            responseData = await response.json();
+        } else {
+            responseData = { text: await response.text() };
+            if (!response.ok) {
+                throw new Error(responseData.text || response.statusText || `HTTP error! Status: ${response.status}`);
+            }
+            if (response.ok && !responseData.text) {
+                return { message: "Logout successful (no content)" };
+            }
+        }
+
+        if (!response.ok) {
+            const errorMessage = responseData?.error || responseData?.message || responseData?.text || `HTTP error! Status: ${response.status}`;
+            throw new Error(errorMessage);
+        }
+        return responseData;
+    } catch (error) {
+        console.error('API Fetch Error:', error);
+        throw new Error(`Network or API error: ${error.message}`);
+    }
+}
+
+      logoutBtn.addEventListener('click', logout);
+
+      window.addEventListener('load', () => {
+          textInput.focus();
+          textInput.dispatchEvent(new Event('input'));
+          chatBox.innerHTML = ''; 
+          appendMessage("Hello! I'm your AI assistant for elderly care. How can I help you today? Feel free to type or use the record button.", 'response');
+          appendMessage("What are some good exercises for seniors?", 'user');
+          appendMessage("Gentle exercises like walking, swimming, chair yoga, and stretching are great options. Would you like more details on any of these?", 'response');
+          const initAudio = async () => {
+              if (!audioContext) {
+                  try {
+                      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                      if (audioContext.state === 'suspended') { await audioContext.resume(); }
+                      console.log("AudioContext initialized/resumed.");
+                  } catch (e) {
+                      console.error("Error initializing AudioContext:", e);
+                      const errorMsgDiv = appendMessage("Could not initialize audio capabilities.", 'response');
+                        const playBtn = errorMsgDiv.querySelector('.play-audio-btn');
+                        if (playBtn) playBtn.remove();
+                  } finally {
+                      document.body.removeEventListener('click', initAudio);
+                      document.body.removeEventListener('keydown', initAudio);
+                  }
+              }
+          };
+          document.body.addEventListener('click', initAudio, { once: true });
+          document.body.addEventListener('keydown', initAudio, { once: true });
+      });
+  </script>
+</body>
+</html>

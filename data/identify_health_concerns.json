@@ -1,0 +1,34 @@
+{
+  "patient_id": "12345",
+  "age": 78,
+  "medical_conditions": [
+    "Type 2 Diabetes",
+    "Hypertension",
+    "Mild Chronic Kidney Disease"
+  ],
+  "allergies": [
+    "Shellfish"
+  ],
+  "intolerances": [
+    "Lactose"
+  ],
+  "dietary_restrictions": [
+    "Low Sodium Diet",
+    "Controlled Carbohydrate Intake"
+  ],
+  "recent_symptoms": [
+    "Occasional heartburn after eating",
+    "Feeling slightly more tired than usual"
+  ],
+  "medications": [
+    "Metformin (for diabetes)",
+    "Lisinopril (for hypertension)",
+    "Calcium supplement"
+  ],
+  "food_preferences": [
+    "Enjoys fruits and vegetables",
+    "Prefers lean proteins",
+    "Has a sweet tooth but tries to limit sugar"
+  ],
+  "notes": "Patient is generally compliant with dietary recommendations but occasionally indulges in sweets. Needs to monitor sodium intake closely due to hypertension and kidney condition."
+}

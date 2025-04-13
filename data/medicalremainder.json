@@ -1,0 +1,32 @@
+[
+  {
+    "reminder_set": true,
+    "medication_name": "Metformin",
+    "dosage": "500 mg",
+    "frequency": "Twice daily",
+    "times": [
+      "8:00 PM"
+    ],
+    "id": "adf046a9-041d-4fef-9b51-aaae235a3881"
+  },
+  {
+    "repeated_medication": false,
+    "reminder_set": true,
+    "medication_name": "profen",
+    "dosage": "200 mg",
+    "frequency": "As needed",
+    "times": [],
+    "id": "daaf556c-ccc2-42cf-bd4a-5ee82f960988"
+  },
+  {
+    "repeated_medication": false,
+    "reminder_set": true,
+    "medication_name": "Metformin",
+    "dosage": "500 mg",
+    "frequency": "Twice daily",
+    "times": [
+      "8:00 PM"
+    ],
+    "id": "67ded539-3101-416d-852e-e160aa9be94d"
+  }
+]
